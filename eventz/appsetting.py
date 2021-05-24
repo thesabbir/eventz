@@ -11,7 +11,8 @@ APPS = [
     'merchandise',
     'orders',
     'tags',
-    'events'
+    'events',
+    'token_auth'
 ]
 
 POSTGRES = {

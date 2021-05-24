@@ -1,6 +1,8 @@
-from eventz.appsetting import APPS, POSTGRES, USER_MODEL
 from pathlib import Path
+
 from environs import Env
+
+from eventz.appsetting import APPS, POSTGRES, USER_MODEL
 
 env = Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,15 +10,18 @@ STATIC_ROOT = Path(BASE_DIR).joinpath('static')
 MEDIA_ROOT = Path(BASE_DIR).joinpath('media')
 
 INSTALLED_APPS = [
-                     'django.contrib.admin',
-                     'django.contrib.auth',
-                     'django.contrib.contenttypes',
-                     'django.contrib.sessions',
-                     'django.contrib.messages',
-                     'django.contrib.staticfiles',
-                     'rest_framework',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_yasg'
 
-                 ] + APPS
+]
+
+INSTALLED_APPS += APPS
 
 DATABASES = {
     'default': POSTGRES
@@ -87,5 +92,12 @@ AUTHENTICATION_BACKENDS = [
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
