@@ -3,7 +3,11 @@ from environs import Env
 env = Env()
 
 APPS = [
-    'users'
+    'users',
+    'merchandise',
+    'orders',
+    'tags',
+    'events'
 ]
 
 POSTGRES = {

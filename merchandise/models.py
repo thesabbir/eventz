@@ -1,17 +1,12 @@
 from django.db import models
 
-# Create your models here.
 
 class Merchandise(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=200)
     photo = models.ImageField()
-    discount = models.IntegerField()
+    discount = models.IntegerField(default=0)
     price = models.IntegerField()
-    tags = models.CharField()
+    tags = models.ManyToManyField('tags.Tag', null=True, blank=True)
     description = models.TextField()
-    user = models.OneToOneRel()
-    events = models.OneToOneRel()
-    orders = models.ManyToOneRel()
-
-
-
+    user = models.ForeignKey('users.UserModel', on_delete=models.RESTRICT)
+    events = models.ManyToManyField('events.Event', null=True,blank=True)
