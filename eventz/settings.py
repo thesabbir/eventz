@@ -2,21 +2,21 @@ from eventz.appsetting import APPS, POSTGRES, USER_MODEL
 from pathlib import Path
 from environs import Env
 
-
 env = Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = Path(BASE_DIR).joinpath('static')
 MEDIA_ROOT = Path(BASE_DIR).joinpath('media')
 
-
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles'
-] + APPS
+                     'django.contrib.admin',
+                     'django.contrib.auth',
+                     'django.contrib.contenttypes',
+                     'django.contrib.sessions',
+                     'django.contrib.messages',
+                     'django.contrib.staticfiles',
+                     'rest_framework',
+
+                 ] + APPS
 
 DATABASES = {
     'default': POSTGRES
@@ -83,3 +83,9 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
